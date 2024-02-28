@@ -179,3 +179,185 @@ function tagUpdateRecipeList() {
         });
     });
 };
+
+displayRecipes(currentRecipesList);
+displayNumberRecipes(null);
+createItemsLists(currentRecipesList);
+currentIngredientsList = sortListItems(currentIngredientsList);
+currentAppliancesList = sortListItems(currentAppliancesList);
+currentUstensilsList = sortListItems(currentUstensilsList);
+displayDropListItems(currentIngredientsList, listIngredientsContainer);
+displayDropListItems(currentAppliancesList, listAppliancesContainer);
+displayDropListItems(currentUstensilsList, listUstensilsContainer);
+
+// event listeners
+searchBarButton.addEventListener("click", () => {
+    searchBarValue = document.getElementById("searchBar").value;
+    const normalizedInput = searchBarValue.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (normalizedInput.length >= 3 && /^[a-zA-Z\s]*$/.test(normalizedInput)) {
+        currentRecipesList = recipes.filter(recipe => {
+            const recipeTitle = recipe.name.toLowerCase();
+            const recipeDesc = recipe.description.toLowerCase();
+            let recipeIngr = false;
+            recipe.ingredients.forEach(ingredient => {
+                ingredient.ingredient.toLowerCase();
+                if (ingredient.ingredient.toLowerCase().includes(normalizedInput.toLowerCase())) {
+                    recipeIngr = true;
+                };
+            });
+
+            if (recipeTitle.includes(normalizedInput.toLowerCase())) {
+                return true
+            } else if (recipeDesc.includes(normalizedInput.toLowerCase())) {
+                return true
+            } else if (recipeIngr) {
+                return true
+            } else {
+                return false
+            }
+        });
+        if (currentRecipesList.length === 0) {
+            numberRecipes.innerText = "Aucune recette ne contient '" + searchBarValue + "'. Vous pouvez chercher 'tarte aux pommes', 'poisson', etc.";
+        } else {
+            displayRecipes(currentRecipesList);
+            displayNumberRecipes(currentRecipesList);
+            createItemsLists(currentRecipesList);
+            currentIngredientsList = sortListItems(currentIngredientsList);
+            currentAppliancesList = sortListItems(currentAppliancesList);
+            currentUstensilsList = sortListItems(currentUstensilsList);
+            updateItemsList(listIngredientsContainer, currentIngredientsList);
+            updateItemsList(listAppliancesContainer, currentAppliancesList);
+            updateItemsList(listUstensilsContainer, currentUstensilsList);
+        };
+    } else {
+        currentRecipesList= recipes;
+        displayRecipes(currentRecipesList);
+        displayNumberRecipes(null);
+        createItemsLists(currentRecipesList);
+        currentIngredientsList = sortListItems(currentIngredientsList);
+        currentAppliancesList = sortListItems(currentAppliancesList);
+        currentUstensilsList = sortListItems(currentUstensilsList);
+        displayDropListItems(currentIngredientsList, listIngredientsContainer);
+        displayDropListItems(currentAppliancesList, listAppliancesContainer);
+        displayDropListItems(currentUstensilsList, listUstensilsContainer);
+    };
+});
+
+dropdownButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        const siblingElement = button.nextElementSibling; // Accédez à l'élément qui suit immédiatement le bouton
+        if (siblingElement) {
+            siblingElement.classList.toggle("show"); // Manipulez l'élément suivant en fonction de vos besoins
+            button.classList.toggle("show");
+        };
+    });
+});
+
+document.addEventListener("click", function (event) {
+    /*currentRecipesList = recipes;*/
+    if ((event.target.classList.contains('closeTag')) || (event.target.classList.contains('validate'))) {
+        if (event.target.classList.contains('validate')) {
+            event.target.classList.remove("validate");
+            const allTags = document.querySelectorAll(".closeTag");
+            allTags.forEach(tag => {
+                if (event.target.innerText.toLowerCase() === tag.parentElement.innerText.toLowerCase()) {
+                    tag.parentElement.remove();
+                };
+            });
+            const spanElement = event.target.querySelector("span");
+            event.target.removeChild(spanElement);
+        } else {
+            //delete the container
+            event.target.parentElement.remove();
+            //remove the class "validate" depending on the closed tag
+            document.querySelectorAll(".dropdown-content ul").forEach(container => {
+                const selectDropListButtons = container.querySelectorAll("li");
+                selectDropListButtons.forEach(button => {
+                    if (event.target.parentElement.innerText.toLowerCase() === button.innerText.toLowerCase()) {
+                        button.classList.remove("validate");
+                    };
+                });
+            });
+        };
+        if (searchBarValue) {
+            const normalizedInput = searchBarValue.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if ((document.querySelectorAll('.closeTag').length > 0)) {
+                console.log("yo");
+                currentRecipesList = recipes.filter(recipe => {
+                    const recipeTitle = recipe.name.toLowerCase();
+                    const recipeDesc = recipe.description.toLowerCase();
+                    let recipeIngr = false;
+                    recipe.ingredients.forEach(ingredient => {
+                        ingredient.ingredient.toLowerCase();
+                        if (ingredient.ingredient.toLowerCase().includes(normalizedInput.toLowerCase())) {
+                            recipeIngr = true;
+                        };
+                    });
+
+                    if (recipeTitle.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeDesc.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeIngr) {
+                        return true
+                    } else {
+                        return false
+                    };
+                });
+                currentRecipesList = recipes.filter(recipe => {
+                    const recipeTitle = recipe.name.toLowerCase();
+                    const recipeDesc = recipe.description.toLowerCase();
+                    let recipeIngr = false;
+                    recipe.ingredients.forEach(ingredient => {
+                        ingredient.ingredient.toLowerCase();
+                        if (ingredient.ingredient.toLowerCase().includes(normalizedInput.toLowerCase())) {
+                            recipeIngr = true;
+                        };
+                    });
+
+                    if (recipeTitle.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeDesc.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeIngr) {
+                        return true
+                    } else {
+                        return false
+                    };
+                });
+                //search bar function recipes
+                tagUpdateRecipeList;
+                displayRecipes(currentRecipesList);
+                displayNumberRecipes(currentRecipesList);
+                createItemsLists(currentRecipesList);
+                currentIngredientsList = sortListItems(currentIngredientsList);
+                currentAppliancesList = sortListItems(currentAppliancesList);
+                currentUstensilsList = sortListItems(currentUstensilsList);
+                updateItemsList(listIngredientsContainer, currentIngredientsList);
+                updateItemsList(listAppliancesContainer, currentAppliancesList);
+                updateItemsList(listUstensilsContainer, currentUstensilsList);
+            } else {
+                console.log("ya");
+                currentRecipesList = recipes.filter(recipe => {
+                    const recipeTitle = recipe.name.toLowerCase();
+                    const recipeDesc = recipe.description.toLowerCase();
+                    let recipeIngr = false;
+                    recipe.ingredients.forEach(ingredient => {
+                        ingredient.ingredient.toLowerCase();
+                        if (ingredient.ingredient.toLowerCase().includes(normalizedInput.toLowerCase())) {
+                            recipeIngr = true;
+                        };
+                    });
+                    
+                    if (recipeTitle.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeDesc.includes(normalizedInput.toLowerCase())) {
+                        return true
+                    } else if (recipeIngr) {
+                        return true
+                    } else {
+                        return false
+                    };
+                });
+                // search bar function
