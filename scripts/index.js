@@ -361,3 +361,78 @@ document.addEventListener("click", function (event) {
                     };
                 });
                 // search bar function
+                
+                displayRecipes(currentRecipesList);
+                displayNumberRecipes(currentRecipesList);
+                createItemsLists(currentRecipesList);
+                currentIngredientsList = sortListItems(currentIngredientsList);
+                currentAppliancesList = sortListItems(currentAppliancesList);
+                currentUstensilsList = sortListItems(currentUstensilsList);
+                updateItemsList(listIngredientsContainer, currentIngredientsList);
+                updateItemsList(listAppliancesContainer, currentAppliancesList);
+                updateItemsList(listUstensilsContainer, currentUstensilsList);
+            };
+        } else {
+            if ((document.querySelectorAll('.closeTag').length > 0)) {
+                console.log("ye");
+                tagUpdateRecipeList();
+                displayRecipes(currentRecipesList);
+                displayNumberRecipes(currentRecipesList);
+                createItemsLists(currentRecipesList);
+                currentIngredientsList = sortListItems(currentIngredientsList);
+                currentAppliancesList = sortListItems(currentAppliancesList);
+                currentUstensilsList = sortListItems(currentUstensilsList);
+                updateItemsList(listIngredientsContainer, currentIngredientsList);
+                updateItemsList(listAppliancesContainer, currentAppliancesList);
+                updateItemsList(listUstensilsContainer, currentUstensilsList);
+            } else {
+                console.log("yu");
+                currentRecipesList = recipes;
+                displayRecipes(currentRecipesList);
+                displayNumberRecipes(null);
+                createItemsLists(recipes);
+                currentIngredientsList = sortListItems(currentIngredientsList);
+                currentAppliancesList = sortListItems(currentAppliancesList);
+                currentUstensilsList = sortListItems(currentUstensilsList);
+                displayDropListItems(currentIngredientsList, listIngredientsContainer);
+                displayDropListItems(currentAppliancesList, listAppliancesContainer);
+                displayDropListItems(currentUstensilsList, listUstensilsContainer);
+            };
+        };
+
+    } else if (event.target.tagName === 'LI' && event.target.closest('.dropdown-content ul')) {
+        if (!searchBarValue) {
+            currentRecipesList = recipes;
+        };
+        // disparition de la div qui contient la liste
+        const parentElement = event.target.parentNode.parentNode;
+        parentElement.classList.toggle("show");
+        // recherche des tag dans la liste des recettes en cours
+        if (event.target.parentNode === listIngredientsContainer) {
+            currentRecipesList = currentRecipesList.filter(recipe => {
+                return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === event.target.innerText.toLowerCase());
+            });
+        } else if (event.target.parentNode === listAppliancesContainer) {
+            currentRecipesList = currentRecipesList.filter(recipe => {
+                return recipe.appliance.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === event.target.innerText.toLowerCase();
+            });
+        } else if (event.target.parentNode === listUstensilsContainer) {
+            currentRecipesList = currentRecipesList.filter(recipe => {
+                return recipe.ustensils.some(ustensil => ustensil.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === event.target.innerText.toLowerCase());
+            });
+        };
+
+        displayRecipes(currentRecipesList);
+        createItemsLists(currentRecipesList);
+        currentIngredientsList = sortListItems(currentIngredientsList);
+        currentAppliancesList = sortListItems(currentAppliancesList);
+        currentUstensilsList = sortListItems(currentUstensilsList);
+        displayNumberRecipes(currentRecipesList);
+        createTag(event.target);
+        event.target.classList.add("validate");
+        event.target.innerHTML += '<span><img class="closeLi" src="assets/icons/closeLi.svg" alt="close LI"></span>';
+        updateItemsList(listIngredientsContainer, currentIngredientsList);
+        updateItemsList(listAppliancesContainer, currentAppliancesList);
+        updateItemsList(listUstensilsContainer, currentUstensilsList);
+    };
+});
