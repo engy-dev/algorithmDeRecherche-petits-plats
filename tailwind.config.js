@@ -80,3 +80,89 @@ module.exports = {
             scrollbarWidth: "none",  /* Firefox */
           },
           
+        '.dropdown-content.show': {
+            transform: "translateY(0%)",
+            transition: "transform ease-out 300ms",
+          },
+          '.dropbtn.show img': {
+            transform: "rotateZ(180deg)",
+          },
+  
+          /* Hide scrollbar for Chrome, Safari and Opera */
+          '.dropdown-content::-webkit-scrollbar': {
+            display: "none",
+          },
+          '.serachContainer': {
+            paddingBottom: "9px",
+          },
+          '.searchItemsContainer': {
+            display: "flex",
+            minHeight: "36px",
+            width: "168px",
+            borderRadius: "2px",
+            border: "1px solid #c6c6c6",
+            margin: "0 auto",
+            paddingLeft: '8px',
+            paddingRight: "11px",
+          },
+          '.dropdownSearch': {
+            color: "#7A7A7A",
+            fontFamily: "Manrope",
+            fontSize: "14px",
+            fontStyle: "normal",
+            fontWeight: "400",
+            lineHeight: "normal",
+            width: "100%",
+          },
+          '.dropdownSearch:focus': {
+            outline: 'none',
+          },
+          '.dropListButtonSelected': {
+            backgroundColor: "#FFD15B",
+            marginRight: "10px",
+            padding: "17px 18px",
+            display: "flex",
+            columnGap: "60px",
+            borderRadius: "11px",
+            alignItems: "center",
+          },
+          '.dropdown-content ul li': {
+            color: "#1b1b1b",
+            fontFamily: "Manrope",
+            fontWeight: "400",
+            fontSize: "14px",
+            lineHeight: "normal",
+            padding: "6.5px 16px",
+            display: "flex",
+            justifyContent: "space-between",
+          },
+          '#ingredients-list li:first-letter, #appliances-list li:first-letter, #ustensils-list li:first-letter': {
+            textTransform: "uppercase",
+          },
+          '#ingredients-list li:hover, #appliances-list li:hover, #ustensils-list li:hover': {
+            backgroundColor: "#FFD15B",
+          },
+          '.dropdown-content ul li.validate': {
+            backgroundColor: "#FFD15B",
+            fontWeight: "700",
+          },
+          '.recipesContainer': {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            margin: "0 auto",
+            paddingTop: " 34px",
+            paddingBottom: "170px",
+            width: "fit-content",
+            columnGap: "48px",
+            rowGap: "66px",
+          },
+          '.recipeCard': {
+            display: "flex",
+            flexDirection: "column",
+            height: "731px",
+            width: "380px",
+            backgroundColor: "white",
+            borderRadius: "21px",
+            position: "relative",
+            boxShadow: "0px 4px 34px 30px rgba(0, 0, 0, 0.04)",
+          },

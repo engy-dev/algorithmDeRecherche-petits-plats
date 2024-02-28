@@ -118,3 +118,64 @@ function createRecipeCard(recipe) {
         recipeContentIngredients.appendChild(listIngredients);
     });
 };
+
+function createItemsLists(currentRecipesList) {
+    currentIngredientsList = [];
+    currentAppliancesList = [];
+    currentUstensilsList = [];
+    currentRecipesList.forEach(currentRecipe => {
+        // we refresh the list of ingredients, appliances and ustensils in the searched recipes
+        currentRecipe.ingredients.forEach(ingredientRecipe => {
+            currentIngredientsList.push(ingredientRecipe.ingredient);
+        });
+        currentAppliancesList.push(currentRecipe.appliance);
+        currentRecipe.ustensils.forEach(ustensilRecipe => {
+            currentUstensilsList.push(ustensilRecipe);
+        });
+    });
+};
+
+function sortListItems(currentListItems) {
+    currentListItems = [...new Set(currentListItems.map(currentListItem => currentListItem.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")))];
+    currentListItems.sort();
+    return currentListItems;
+};
+
+function createTag(button) {
+    //creating tags
+    const dropListButtonSelected = document.createElement("button");
+    dropListButtonSelected.type = "button";
+    dropListButtonSelected.className = "dropListButtonSelected";
+    const dropListButtonSelectedImage = document.createElement("img");
+    dropListButtonSelectedImage.className = "closeTag";
+    dropListButtonSelectedImage.src = "assets/icons/closeButton.svg";
+    dropListButtonSelectedImage.alt = "Close Tag";
+    dropListButtonSelected.innerText = button.innerText;
+    //showing tags
+    searchContainer.appendChild(dropdownTagContainer);
+    dropdownTagContainer.appendChild(dropListButtonSelected);
+    dropListButtonSelected.appendChild(dropListButtonSelectedImage);
+};
+
+function updateItemsList(itemsListUl, currentItemsList) {
+    const allItems = itemsListUl.querySelectorAll("li");
+
+    allItems.forEach(displayItem => {
+        const itemInDisplayItemsList = currentItemsList.some(item => item === displayItem.innerText.toLowerCase());
+        if (!itemInDisplayItemsList) {
+            displayItem.remove();
+        }
+    });
+};
+
+function tagUpdateRecipeList() {
+    const tagValueAll = document.querySelectorAll(".dropListButtonSelected");
+    tagValueAll.forEach(tagValue => {
+
+        currentRecipesList = currentRecipesList.filter(recipe => {
+            return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === tagValue.innerText.toLowerCase())
+                || recipe.appliance.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === tagValue.innerText.toLowerCase()
+                || recipe.ustensils.some(ustensil => ustensil.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === tagValue.innerText.toLowerCase());
+        });
+    });
+};
