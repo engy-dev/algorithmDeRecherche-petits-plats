@@ -404,10 +404,10 @@ document.addEventListener("click", function (event) {
         if (!searchBarValue) {
             currentRecipesList = recipes;
         };
-        // disparition de la div qui contient la liste
+        // deleting the div that contains the list 
         const parentElement = event.target.parentNode.parentNode;
         parentElement.classList.toggle("show");
-        // recherche des tag dans la liste des recettes en cours
+        // search the tags in the list of recipes
         if (event.target.parentNode === listIngredientsContainer) {
             currentRecipesList = currentRecipesList.filter(recipe => {
                 return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === event.target.innerText.toLowerCase());
@@ -436,3 +436,18 @@ document.addEventListener("click", function (event) {
         updateItemsList(listUstensilsContainer, currentUstensilsList);
     };
 });
+
+
+const divDropContainer = document.querySelectorAll(".dropdownDivContainer");
+divDropContainer.forEach(div => {
+    div.addEventListener("mouseout", function (event) {
+        const targetElement = event.relatedTarget;
+        const dropdownContent = this.querySelector('.dropdown-content');
+
+
+        if (!this.contains(targetElement)) {
+            dropdownContent.classList.toggle("show", false);
+        };
+    });
+});
+
