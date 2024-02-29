@@ -2084,6 +2084,7 @@ video {
 }
 
 .bg-backgroundPetitsPlats {
+  background-size: cover;
   background-image: url('../../assets/images/backgroundImage.jpg');
 }
 
