@@ -1,5 +1,6 @@
 # PetitsPlats2.0
 # Project 7 of OC Js path
+<a href="https://engy-dev.github.io/algorithmDeRecherche-petits-plats/"> Here's </a> the website online! <br> <br>
 This project focuses on the creation of a recipe website that has a functional search engine by using js with the help of NPMs in order to make it take a total of four critereas:
 1. Recipe's name.
 2. Recipe's ingredients
