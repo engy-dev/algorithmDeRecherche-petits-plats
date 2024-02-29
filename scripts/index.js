@@ -451,3 +451,68 @@ divDropContainer.forEach(div => {
     });
 });
 
+
+searchIngredients.addEventListener("input", () => {
+    const searchIngredientValue = document.getElementById("searchIngredients").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    if (searchIngredientValue.length >= 3 && /^[a-zA-Z\s]*$/.test(searchIngredientValue)) {
+        const filteredIngredients = currentIngredientsList.reduce((accumulator, currentValue) => {
+            const normalizedCurrent = currentValue.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (normalizedCurrent.includes(searchIngredientValue)) {
+                accumulator.push(currentValue);
+            }
+
+            return accumulator;
+        }, []);
+
+        displayDropListItems(filteredIngredients, listIngredientsContainer);
+    };
+});
+
+searchAppliances.addEventListener("input", () => {
+    const searchApplianceValue = document.getElementById("searchAppliances").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    if (searchApplianceValue.length >= 3 && /^[a-zA-Z\s]*$/.test(searchApplianceValue)) {
+        const filteredAppliances = currentAppliancesList.reduce((accumulator, currentValue) => {
+            const normalizedCurrent = currentValue.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (normalizedCurrent.includes(searchApplianceValue)) {
+                accumulator.push(currentValue);
+            }
+
+            return accumulator;
+        }, []);
+
+        displayDropListItems(filteredAppliances, listAppliancesContainer);
+    };
+});
+
+searchUstensils.addEventListener("input", () => {
+    const searchUstensilValue = document.getElementById("searchUstensils").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    if (searchUstensilValue.length >= 3 && /^[a-zA-Z\s]*$/.test(searchUstensilValue)) {
+        const filteredUstensils = currentUstensilsList.reduce((accumulator, currentValue) => {
+            const normalizedCurrent = currentValue.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (normalizedCurrent.includes(searchUstensilValue)) {
+                accumulator.push(currentValue);
+            }
+
+            return accumulator;
+        }, []);
+
+        displayDropListItems(filteredUstensils, listUstensilsContainer);
+    };
+});
+
+searchBarInput.addEventListener("input", () => {
+    searchBarValue = searchBarInput.value;
+    const eraseSearchbar = document.querySelector(".eraseSearchbar");
+    if (searchBarValue.length >= 3) {
+        eraseSearchbar.style.display = ("block");
+    } else {
+        eraseSearchbar.style.display = ("none");
+    };
+});
+
