@@ -91,8 +91,17 @@ module.exports = {
         '.dropdown-content::-webkit-scrollbar': {
           display: "none",
         },
-        '.serachContainer': {
+        '.searchContainer': {
           paddingBottom: "9px",
+        },
+        '.eraseSearchbar': {
+          display: "none",
+          paddingRight: "20px",
+        },
+        '.eraseSearchbarItem': {
+          display: "none",
+          paddingRight: "8px",
+          width: "16px",
         },
         '.searchItemsContainer': {
           display: "flex",
@@ -118,7 +127,6 @@ module.exports = {
         },
         '.dropListButtonSelected': {
           backgroundColor: "#FFD15B",
-          marginRight: "10px",
           padding: "17px 18px",
           display: "flex",
           columnGap: "60px",

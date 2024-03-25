@@ -1,3 +1,6 @@
+/*
+! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
+*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -63,7 +66,7 @@ body {
 
 /*
 1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
 3. Ensure horizontal rules are visible by default.
 */
 
@@ -77,7 +80,7 @@ hr {
 }
 
 /*
-Add the correct text decoration in all browsers
+Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr:where([title]) {
@@ -109,7 +112,7 @@ a {
 }
 
 /*
-Add the correct font weight for Edge and Safari.
+Add the correct font weight in Edge and Safari.
 */
 
 b,
@@ -214,7 +217,6 @@ button,
 select {
   text-transform: none;
 }
-
 
 /*
 1. Correct the inability to style clickable types in iOS and Safari.
@@ -632,8 +634,19 @@ video {
   display: none;
 }
 
-.serachContainer {
+.searchContainer {
   padding-bottom: 9px;
+}
+
+.eraseSearchbar {
+  display: none;
+  padding-right: 20px;
+}
+
+.eraseSearchbarItem {
+  display: none;
+  padding-right: 8px;
+  width: 16px;
 }
 
 .searchItemsContainer {
@@ -663,7 +676,6 @@ video {
 
 .dropListButtonSelected {
   background-color: #FFD15B;
-  margin-right: 10px;
   padding: 17px 18px;
   display: flex;
   -moz-column-gap: 60px;
@@ -2084,8 +2096,7 @@ video {
 }
 
 .bg-backgroundPetitsPlats {
-  background-size: cover;
-  background-image: url('../../assets/images/backgroundImage.jpg');
+  background-image: url('../../assets/images/backgroundImage.png');
 }
 
 .decoration-slice {
@@ -2722,6 +2733,15 @@ video {
   --tw-content: 'this-is-also-valid]-weirdly-enough';
   content: var(--tw-content);
 }
+
+/* Clears the 'X' from Chrome search input */
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+};
 
 @media (min-width: 640px) {
   .sm\:container {
